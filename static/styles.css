@@ -1,0 +1,100 @@
+nav {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    background-color: #121212;
+}
+
+a {
+    text-decoration: none;
+    color: #40E0D0;
+}
+
+a:hover{
+    color: steelblue;
+}
+
+#brand {
+    color: steelblue;
+    text-shadow: -1px -1px 0 snow, 1px -1px 0 snow, -1px 1px 0 snow, 1px 1px 0 snow;
+}
+
+#brand:hover{
+    color: grey;
+}
+
+.nav-link {
+    color: turquoise;
+}
+
+.nav-link:hover{
+    color: whitesmoke;
+}
+
+#register {
+    color: turquoise;
+    outline-color: turquoise;
+    border-color: turquoise;
+}
+
+#login {
+    color: gold;
+    border-color: darkgoldenrod;
+}
+
+#login:hover, #register:hover {
+    background-color: transparent;
+    border-color: snow;
+    color: steelblue;
+}
+
+#separation {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.login-h, .register-h {
+    color:darkgoldenrod;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.account-check {
+    color:snow;
+}
+
+.container-sm {
+    background-color:#343a40;
+    border: 3px solid snow;
+    border-radius: 15px;
+    max-width: 55%;
+    padding-bottom: 3%;
+    padding-top: 3%;
+}
+
+.typer-container {  
+    margin: auto;
+    border: 2px solid snow;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    max-width: 75%;
+}
+
+textarea {
+    resize: none;
+    margin: auto;
+    overflow: auto;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline;
+}
+
+.quote-display {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 3%;
+    padding-bottom: 5%;
+    background-color: blue;
+    border-radius: 12px;
+}
+
+
+
