@@ -3,7 +3,8 @@ nav {
 }
 
 body {
-    background-color: #121212;
+    background: linear-gradient(to bottom, #000000 0%, #666699 100%);
+    background-attachment: fixed;
 }
 
 a {
@@ -15,6 +16,10 @@ a:hover{
     color: steelblue;
 }
 
+div {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 #brand {
     color: steelblue;
     text-shadow: -1px -1px 0 snow, 1px -1px 0 snow, -1px 1px 0 snow, 1px 1px 0 snow;
@@ -22,14 +27,6 @@ a:hover{
 
 #brand:hover{
     color: grey;
-}
-
-.nav-link {
-    color: turquoise;
-}
-
-.nav-link:hover{
-    color: whitesmoke;
 }
 
 #register {
@@ -52,6 +49,24 @@ a:hover{
 #separation {
     padding-top: 3%;
     padding-bottom: 3%;
+}
+
+#credit {
+    color: snow;
+    text-align: center;
+    position: absolute;
+    justify-content: center;
+    margin-left: 45%;
+    margin-top: 23%;
+    
+}
+
+.nav-link {
+    color: turquoise;
+}
+
+.nav-link:hover{
+    color: whitesmoke;
 }
 
 .login-h, .register-h {
@@ -89,12 +104,12 @@ textarea {
 }
 
 .quote-display {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding-top: 3%;
     padding-bottom: 5%;
-    background-color: blue;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    max-width: 80%;
+    background-color: lightblue;
     border-radius: 12px;
 }
-
-
-
