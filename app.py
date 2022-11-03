@@ -3,6 +3,7 @@ import os
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from datetime import datetime
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
@@ -20,6 +21,10 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     return render_template("login.html")
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
