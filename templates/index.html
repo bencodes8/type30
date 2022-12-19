@@ -5,23 +5,26 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-lg">
 
-        <div class="quote-display mt-4" id="quoteDisplay">
-            <div class="loader"></div>
-        </div>
-        <div class="separation"></div>  
+        <div class="word-block mt-4" id="wordBlock"></div>
+        
+        <div class="separation"></div> 
+
             <div class="row">
-                <input class="form-control" id="input" type="text" placeholder="Input" aria-label="default input example" autofocus>
-                <button id="reset" type="button" class="btn btn-primary" onClick="refreshPage()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-reload" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1.002 7.935 1.007 9.425 4.747"></path>
-                        <path d="M20 4v5h-5"></path>
-                     </svg>
-                </button>
-                <div id="timer">1:00</div>
+                <div class="inner-row">
+                    <input class="form-control" id="wordInput" type="text" placeholder="Input" aria-label="default input example" autofocus>
+                    <div class="tr">
+                        <button id="reset" type="button" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                             </svg>
+                        </button>
+                        <div id="timer">1:00</div>
+                    </div>
+                </div>
             </div>
-            
-     </div>
+    
+
 {% endblock %}
