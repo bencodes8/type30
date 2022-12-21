@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     renderWords()
 
-    const wordDisplayElement = document.getElementById('wordBlock')
+    let wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
+    let lettersTyped = 0
     let startTime = 0 // seconds
 
     inputField.addEventListener('input', () => {
@@ -16,7 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     inputField.addEventListener('input', () => {
         const letterArray = wordDisplayElement.querySelectorAll('span')
-        const trackLetters = inputField.value
+        if (wordDisplayElement.querySelector('span') == null)
+        {
+            console.log('empty')
+        }
+        const amtLetters = inputField.value
         const letterInput = inputField.value.split('')
 
         letterArray.forEach((charSpan, index) => {
@@ -28,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else if (character == charSpan.innerText) 
             {
-                if (character == ' ' || trackLetters.length == letterArray.length) 
+                if (character == ' ' || amtLetters.length == letterArray.length) 
                 {
-                    for (let i = 0; i < trackLetters.length; i++)
+                    for (let i = 0; i < amtLetters.length; i++)
                     {
                         letterArray[i].remove()
                     }
