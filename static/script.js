@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
-    let lettersCorrect = 0
     let startTime = 0 // seconds
 
     inputField.addEventListener('input', () => {
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const letterArray = wordDisplayElement.querySelectorAll('span')
         const trackLetters = inputField.value
         const letterInput = inputField.value.split('')
-        console.log(trackLetters)
 
         letterArray.forEach((charSpan, index) => {
             const character = letterInput[index]
@@ -30,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else if (character == charSpan.innerText) 
             {
-                if (character == ' ')
+                if (character == ' ' || trackLetters.length == letterArray.length) 
                 {
                     for (let i = 0; i < trackLetters.length; i++)
                     {
@@ -76,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
         {
             text += words[i];
         }
+        text += ' '
         str = text.replaceAll(',', ' ')
         str.split('').forEach(character => {
             const charSpan = document.createElement('span')
