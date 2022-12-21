@@ -3,10 +3,12 @@ const API_URL = 'https://random-word-api.herokuapp.com/word?number=5'
 
 // have html parsed first
 document.addEventListener("DOMContentLoaded", function() {
+    renderWords()
+    
     const wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
     let lettersCorrect = 0
-    let startTime = 60 // seconds
+    let startTime = 0 // seconds
 
     inputField.addEventListener('input', () => {
         startTimer()
@@ -20,23 +22,13 @@ document.addEventListener("DOMContentLoaded", function() {
             const character = letterInput[index]
             if (character == null) 
             {
-                if (lettersCorrect > 0)
-                {
-                    lettersCorrect--
-                }
                 charSpan.classList.remove('correct')
                 charSpan.classList.remove('incorrect')
             }
             else if (character == charSpan.innerText) 
             {
-                if (character == ' ')
-                {
-                    lettersCorrect--
-                }
                 charSpan.classList.add('correct')
                 charSpan.classList.remove('incorrect')
-                lettersCorrect++
-                console.log(lettersCorrect)
             }
             else 
             {
@@ -45,8 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     })
-
-    console.log("score: " + getScore(lettersCorrect))
 
     // fetch api
     function getWords() 
@@ -59,21 +49,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function startTimer() {
         var timeRemaining = startTime
       setInterval(() => {
-        if (timeRemaining === 30)
+        if (timeRemaining === 0)
         {
             inputField.setAttribute('disabled', true)
             return
         }
-        timeRemaining -= 1
+        timeRemaining++
         timer.innerText = timeRemaining
       }, 1000)
       
-    }
-
-    function getScore(letters)
-    {
-        score = Math.floor(letters / 2)
-        return score
     }
 
     // render words
@@ -94,5 +78,5 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         document.getElementById('loader').style.display = 'none'
     }
-    renderWords();
+
 });
