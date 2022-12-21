@@ -5,18 +5,17 @@ const API_URL = 'https://random-word-api.herokuapp.com/word?number=5'
 document.addEventListener("DOMContentLoaded", function() {
     const wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
-    let isTyping = 0
     let lettersCorrect = 0
+    let startTime = 60 // seconds
 
     inputField.addEventListener('input', () => {
-        const arrayLetter = wordDisplayElement.querySelectorAll('span');
+        startTimer()
+    }, {once: true})
+
+    inputField.addEventListener('input', () => {
+        const arrayLetter = wordDisplayElement.querySelectorAll('span')
         const letterInput = inputField.value.split('')
 
-        isTyping++;
-        if (isTyping === 1)
-        {
-            startTimer()
-        }
         arrayLetter.forEach((charSpan, index) => {
             const character = letterInput[index]
             if (character == null) 
@@ -46,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     })
-    
-    let startTime = 60 // seconds
+
+    console.log("score: " + getScore(lettersCorrect))
 
     // fetch api
     function getWords() 
@@ -60,15 +59,21 @@ document.addEventListener("DOMContentLoaded", function() {
     function startTimer() {
         var timeRemaining = startTime
       setInterval(() => {
-        if (timeRemaining === 0)
+        if (timeRemaining === 30)
         {
             inputField.setAttribute('disabled', true)
-            return Math.floor(lettersCorrect / 60)
+            return
         }
         timeRemaining -= 1
         timer.innerText = timeRemaining
       }, 1000)
       
+    }
+
+    function getScore(letters)
+    {
+        score = Math.floor(letters / 2)
+        return score
     }
 
     // render words
