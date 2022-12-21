@@ -1,44 +1,79 @@
 //store API url
-const API_URL = 'https://random-word-api.herokuapp.com/word?number=40'
+const API_URL = 'https://random-word-api.herokuapp.com/word?number=5'
 
 // have html parsed first
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
     const wordDisplayElement = document.getElementById('wordBlock')
-    const wordInputElement = document.getElementById('wordInput')
+    let inputField = document.getElementById('wordInput')
+    let isTyping = 0
+    let lettersCorrect = 0
 
-    wordInputElement.addEventListener('input', () => {
+    inputField.addEventListener('input', () => {
         const arrayLetter = wordDisplayElement.querySelectorAll('span');
-        const arrayValue = wordInputElement.value.split('')
-        
-        
-        arrayLetter.forEach((characterSpan, index) => {
-            const character = arrayValue[index]
+        const letterInput = inputField.value.split('')
+
+        isTyping++;
+        if (isTyping === 1)
+        {
+            startTimer()
+        }
+        arrayLetter.forEach((charSpan, index) => {
+            const character = letterInput[index]
             if (character == null) 
             {
-                characterSpan.classList.remove('correct')
-                characterSpan.classList.remove('incorrect')
+                if (lettersCorrect > 0)
+                {
+                    lettersCorrect--
+                }
+                charSpan.classList.remove('correct')
+                charSpan.classList.remove('incorrect')
             }
-            else if (character == characterSpan.innerText) {
-                characterSpan.classList.add('correct')
-                characterSpan.classList.remove('incorrect')
+            else if (character == charSpan.innerText) 
+            {
+                if (character == ' ')
+                {
+                    lettersCorrect--
+                }
+                charSpan.classList.add('correct')
+                charSpan.classList.remove('incorrect')
+                lettersCorrect++
+                console.log(lettersCorrect)
             }
             else 
             {
-                characterSpan.classList.add('incorrect')
-                characterSpan.classList.remove('correct')
+                charSpan.classList.add('incorrect')
+                charSpan.classList.remove('correct')
             }
-
         })
     })
+    
+    let startTime = 60 // seconds
 
     // fetch api
-    function getWords() {
+    function getWords() 
+    {
         return fetch(API_URL)
             .then(res => res.json())
     }
 
+    // timer
+    function startTimer() {
+        var timeRemaining = startTime
+      setInterval(() => {
+        if (timeRemaining === 0)
+        {
+            inputField.setAttribute('disabled', true)
+            return Math.floor(lettersCorrect / 60)
+        }
+        timeRemaining -= 1
+        timer.innerText = timeRemaining
+      }, 1000)
+      
+    }
+
     // render words
-    async function renderWords() {
+    async function renderWords() 
+    {
         const words = [];
         words.push(await getWords());
         text = "";
@@ -48,15 +83,11 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         str = text.replaceAll(',', ' ');
         str.split('').forEach(character => {
-            const charSpan = document.createElement('span');
+            const charSpan = document.createElement('span')
             charSpan.innerText = character;
             wordDisplayElement.appendChild(charSpan);
         })
+        document.getElementById('loader').style.display = 'none'
     }
     renderWords();
-    document.getElementById("reset").addEventListener("click", renderWords, true);
 });
-
-
-
-
