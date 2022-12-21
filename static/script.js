@@ -3,8 +3,9 @@ const API_URL = 'https://random-word-api.herokuapp.com/word?number=5'
 
 // have html parsed first
 document.addEventListener("DOMContentLoaded", function() {
+
     renderWords()
-    
+
     const wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
     let lettersCorrect = 0
@@ -15,10 +16,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }, {once: true})
 
     inputField.addEventListener('input', () => {
-        const arrayLetter = wordDisplayElement.querySelectorAll('span')
+        const letterArray = wordDisplayElement.querySelectorAll('span')
+        const trackLetters = inputField.value
         const letterInput = inputField.value.split('')
+        console.log(trackLetters)
 
-        arrayLetter.forEach((charSpan, index) => {
+        letterArray.forEach((charSpan, index) => {
             const character = letterInput[index]
             if (character == null) 
             {
@@ -27,6 +30,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else if (character == charSpan.innerText) 
             {
+                if (character == ' ')
+                {
+                    for (let i = 0; i < trackLetters.length; i++)
+                    {
+                        letterArray[i].remove()
+                    }
+                    inputField.value = ''
+                }
                 charSpan.classList.add('correct')
                 charSpan.classList.remove('incorrect')
             }
@@ -49,11 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function startTimer() {
         var timeRemaining = startTime
       setInterval(() => {
-        if (timeRemaining === 0)
-        {
-            inputField.setAttribute('disabled', true)
-            return
-        }
         timeRemaining++
         timer.innerText = timeRemaining
       }, 1000)
@@ -70,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
         {
             text += words[i];
         }
-        str = text.replaceAll(',', ' ');
+        str = text.replaceAll(',', ' ')
         str.split('').forEach(character => {
             const charSpan = document.createElement('span')
             charSpan.innerText = character;
@@ -78,5 +84,4 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         document.getElementById('loader').style.display = 'none'
     }
-
 });
