@@ -108,11 +108,10 @@ button#reset {
 
 /* containers */
 .container-sm {
-    background-color: transparent;
-    opacity: 0.9;
+    background: rgba(0, 0, 0, .30);
     border: 2px solid snow;
     border-radius: 25px;
-    margin-top: 5%;
+    margin-top: 20px;
     padding-top: 2.5%;
     max-width: 50%;
 }
@@ -126,7 +125,6 @@ button#reset {
     height: 100px;
     max-width: 80%;
     text-align: left;
-    align-items: middle;
     margin: auto;
     padding-top: 0.5%;
     padding-bottom: 1.5%;
@@ -134,6 +132,20 @@ button#reset {
     border-radius: 12.5px;
     border: 2px solid black;
 }
+
+.alert {
+    margin: auto;
+    margin-top: 20px;
+    width: 30%;
+}
+
+.message {
+    display: inline-block;
+}
+.btn-close {
+    float: right;
+}
+
 
 /* loader FROM W3 schools */ 
 .loader {
