@@ -15,7 +15,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-conn = sqlite3.connect('keys.db')
+conn = sqlite3.connect('keys.db', check_same_thread=False)
 db = conn.cursor()
 
 @app.after_request
@@ -34,13 +34,21 @@ def index():
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method == "POST":
-        if request.form.get("r-password") != request.form.get("r-confirm"):
+        if request.form.get("password") != request.form.get("confirmation"):
             flash("Passwords do not match!")
             return render_template("register.html")
         
-        pw_hash = generate_password_hash(request.form.get("r-password"))
-        db.execute("INSERT INTO users (username, hash) VALUES (?,?)", request.form.get("r-username"), pw_hash)
-        
+        try:
+            db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),))
+            if db.fetchone() is not None:
+                flash("Username already exists")
+                return render_template("register.html")
+        except:
+            db.rollback()    
+        pw_hash = generate_password_hash(request.form.get("password"))
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", (request.form.get("username"), pw_hash))
+        conn.commit()
+        flash("Succesfully registered!")
     return render_template("register.html")
 
 @app.route("/login", methods=["GET","POST"])
