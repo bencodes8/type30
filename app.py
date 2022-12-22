@@ -33,13 +33,16 @@ def register():
         if request.form.get("r-password") != request.form.get("r-confirm"):
             flash("Passwords do not match!")
             return render_template("register.html")
-            
+        
+        pw_hash = generate_password_hash(request.form.get("r-password"))
+        
     return render_template("register.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
-    session.clear()
     
+    session.clear()
+        
     return render_template("login.html")
 
 @app.route("/leaderboards", methods=["GET", "POST"])
