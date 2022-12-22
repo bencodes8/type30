@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
-    let lettersTyped = 0
+    let lettersCorrect = 0
     let startTime = 0 // seconds
 
     inputField.addEventListener('input', () => {
