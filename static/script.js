@@ -17,10 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     inputField.addEventListener('input', () => {
         const letterArray = wordDisplayElement.querySelectorAll('span')
-        if (wordDisplayElement.querySelector('span') == null)
-        {
-            console.log('empty')
-        }
         const amtLetters = inputField.value
         const letterInput = inputField.value.split('')
 
@@ -49,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 charSpan.classList.add('incorrect')
                 charSpan.classList.remove('correct')
             }
+
         })
     })
 
@@ -63,6 +60,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function startTimer() {
         var timeRemaining = startTime
       setInterval(() => {
+        if (wordDisplayElement.querySelector('span') == null)
+        {
+            return 
+        }
         timeRemaining++
         timer.innerText = timeRemaining
       }, 1000)
