@@ -45,19 +45,46 @@ def register():
                 return render_template("register.html")
         except:
             db.rollback()    
+            
         pw_hash = generate_password_hash(request.form.get("password"))
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", (request.form.get("username"), pw_hash))
         conn.commit()
         flash("Succesfully registered!")
+        
     return render_template("register.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
     
     session.clear()
+    
+    if request.method == "POST":
+        try:
+            db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),))
+            row = db.fetchone()
+            print(row)
+            if row is None:
+                flash("Invalid username")
+                return render_template("login.html")
+            elif not check_password_hash(row[2], request.form.get("password")):
+                flash("Invalid password")
+                return render_template("login.html") 
+        except:
+            db.rollback()
+        
+        flash("Successfully logged in!")
+        return redirect("/")
         
     return render_template("login.html")
 
-@app.route("/leaderboards", methods=["GET", "POST"])
-def leaderboards():
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+@app.route("/boards", methods=["GET", "POST"])
+def boards():
+    db.execute("SELECT * FROM users")
+    test = db.fetchall()
+    print(test)
     return render_template("boards.html")
