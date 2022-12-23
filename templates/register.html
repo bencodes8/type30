@@ -4,18 +4,17 @@
 
 {% block content %}
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <div class="alert alert-warning" role="alert">  
-                    <div class="message"> {{msg}} </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning" role="alert">  
+                <div class="message"> {{msg}} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
     {% endwith %}
 {% endblock %}
     
-
 {% block main %}
     <div class="container-sm">
         <h1 class="text-center">A New Challenger?</h1>
@@ -32,6 +31,11 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit">Register</button>
+
+                <div class="mb-3 account-check">
+                    Already have an account? <a href="/login">Login Here</a>
+                </div>
+
             </form>
     </div>
 {% endblock %}

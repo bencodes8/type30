@@ -4,10 +4,23 @@
     Login
 {% endblock %}
 
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning" role="alert">  
+                <div class="message"> {{msg}} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+{% endblock %}
+
 {%block main %}
 <div class="container-sm">
     <h1 class="text-center"> Who Is Logging In? </h1>
-    <form class="text-center form-group m-3" method="post">
+    <form class="text-center form-group m-3" method="post" action="/login">
         <div class="form-group mb-3">
                 <input type="text" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" required>
         </div>
@@ -16,11 +29,11 @@
                 <input type="password" autofocus class="form-control mx-auto w-auto" name="password" placeholder="Password" required>
         </div>
 
+        <button type="submit" class="btn btn-primary">Log In</button>
+
         <div class="mb-3 account-check">
             Don't have an account? <a href="/register">Register Here</a>
         </div>
-
-        <button type="submit" class="btn btn-primary">Log In</button>
     </form>
 </div>
 
