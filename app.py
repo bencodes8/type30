@@ -80,7 +80,6 @@ def login():
         try:
             db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),))
             row = db.fetchone()
-            print(row)
             if row is None:
                 flash("Invalid username")
                 return render_template("login.html")
@@ -100,6 +99,7 @@ def login():
 @login_required
 def logout():
     session.clear()
+    flash("Sucessfully logged out!")
     return redirect("/")
 
 @app.route("/boards", methods=["GET", "POST"])
@@ -109,7 +109,6 @@ def boards():
     
     db.execute("SELECT * FROM users")
     users = db.fetchall()
-    print(users)
     
     for user in users:
         if user[3] is not None and user[3] <= fastest_time:
@@ -119,8 +118,6 @@ def boards():
             continue
         else:
             in_order.append(user)
-    
-    print(in_order)
     
     return render_template("boards.html", in_order=in_order)
 
