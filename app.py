@@ -27,10 +27,13 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-    
-@app.route("/", methods=["GET","POST"])
+@app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/play", methods=["GET","POST"])
+def play():
+    return render_template("play.html")
 
 @app.route('/passtime/<string:time>', methods=["GET"])
 @login_required
