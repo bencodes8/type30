@@ -1,5 +1,5 @@
 //store API url
-const API_URL = 'https://random-word-api.herokuapp.com/word?number=5'
+const API_URL = 'https://random-word-api.herokuapp.com/word?number=30'
 
 // have html parsed first
 document.addEventListener("DOMContentLoaded", function() {
