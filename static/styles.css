@@ -119,7 +119,7 @@ button#reset {
 
 .word-block{
     display: block;
-    overflow: scroll;
+    overflow: hidden;
     overflow-wrap: break-word;
     background-color: white;
     font-size: 28px;
