@@ -4,6 +4,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
+import json
 
 from settings import login_required
 
@@ -26,10 +27,24 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
+    
 @app.route("/", methods=["GET","POST"])
 def index():
     return render_template("index.html")
+
+@app.route('/passtime/<string:time>', methods=["GET"])
+@login_required
+def passTime(time):
+    time_info = json.loads(time)
+    db.execute("SELECT time FROM users WHERE id = ?", (session["user_id"],))
+    users_best_time = db.fetchone()[0]
+    if users_best_time is None or time_info < users_best_time:
+         db.execute("UPDATE users SET time = ? WHERE id = ?", (time_info, session["user_id"]))
+         conn.commit()
+    else:
+        db.rollback()
+
+    return('/')
 
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -48,7 +63,7 @@ def register():
             
         pw_hash = generate_password_hash(request.form.get("password"))
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", (request.form.get("username"), pw_hash))
-        conn.commit()
+        conn.commit()   
         flash("Succesfully registered!")
         
     return render_template("register.html")
@@ -71,20 +86,40 @@ def login():
                 return render_template("login.html") 
         except:
             db.rollback()
-        
-        flash("Successfully logged in!")
+            
+        session["user_id"] = row[0]
+        flash(f"Successfully logged in! Welcome back, {row[1]}")
         return redirect("/")
         
     return render_template("login.html")
 
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     return redirect("/")
 
 @app.route("/boards", methods=["GET", "POST"])
 def boards():
+    in_order = []
+    fastest_time = 1000
+    
     db.execute("SELECT * FROM users")
-    test = db.fetchall()
-    print(test)
-    return render_template("boards.html")
+    users = db.fetchall()
+    print(users)
+    
+    for user in users:
+        if user[3] is not None and user[3] <= fastest_time:
+            fastest_time = user[3]
+            in_order.insert(0, user)
+        elif user[3] is None:
+            continue
+        else:
+            in_order.append(user)
+    
+    print(in_order)
+    
+    return render_template("boards.html", in_order=in_order)
+
+if __name__ == "__main__":
+    app.run(debug=True)
