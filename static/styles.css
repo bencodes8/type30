@@ -147,6 +147,36 @@ button#reset {
     float: right;
 }
 
+.table-container {
+    background-color: black;
+    border: 1px solid white;
+    margin: auto;
+    margin-top: 1%;
+    width: 75%;
+}
+
+.index-container {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 3%;
+    width: 60%;
+}
+
+.gif {
+    width: 100%;
+    
+    margin: auto;
+}
+
+.welcome-msg {
+    text-align: center;
+    margin-top: 2.5%;
+    font-size: min(3vw, 28px);
+    color: snow;
+}
+
 
 /* loader FROM W3 schools */ 
 .loader {
