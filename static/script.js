@@ -8,11 +8,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let wordDisplayElement = document.getElementById('wordBlock')
     let inputField = document.getElementById('wordInput')
-    let lettersCorrect = 0
+    let time = 0
     let startTime = 0 // seconds
 
     inputField.addEventListener('input', () => {
-        startTimer()
+        interval = setInterval(startTimer, 1000)
+
     }, {once: true})
 
     inputField.addEventListener('input', () => {
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 charSpan.classList.remove('incorrect')
             }
             else if (character == charSpan.innerText) 
-            {
+            {   
                 if (character == ' ' || amtLetters.length == letterArray.length) 
                 {
                     for (let i = 0; i < amtLetters.length; i++)
@@ -56,19 +57,21 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(res => res.json())
     }
 
-    // timer
+    // start timer
     function startTimer() {
-        var timeRemaining = startTime
-      setInterval(() => {
+        startTime++
+        timer.innerText = startTime
         if (wordDisplayElement.querySelector('span') == null)
         {
-            return 
+            clearInterval(interval)
+            inputField.setAttribute('disabled', true)
+            time = timer.innerText
+            const request = new XMLHttpRequest()
+            request.open('GET', `/passtime/${JSON.stringify(time)}`)
+            request.send()
         }
-        timeRemaining++
-        timer.innerText = timeRemaining
-      }, 1000)
-      
     }
+
 
     // render words
     async function renderWords() 
