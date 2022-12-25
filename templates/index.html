@@ -6,13 +6,34 @@
 
 {% block main %}
 
+    {% if not session["user_id"] %}
+    <div class="alert alert-danger" role="alert">  
+            <div class="message"> You are not logged in! Your time will not be recorded! </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% else %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning" role="alert">  
+                <div class="message"> {{msg}} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+{% endblock %}
+    {% endif %}
+
         <div class="word-block mt-4" id="wordBlock">
             <div id="loader" class="loader"></div>
         </div>
         
         <div class="separation">
         </div> 
-
+        
             <div class="row">
                 <div class="inner-row">
                     <input class="form-control" id="wordInput" type="text" placeholder="Input" aria-label="default input example" autofocus>
