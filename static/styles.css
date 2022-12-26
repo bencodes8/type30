@@ -177,6 +177,16 @@ button#reset {
     color: snow;
 }
 
+.footer {
+    color: snow;
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    
+}
+
 
 /* loader FROM W3 schools */ 
 .loader {
