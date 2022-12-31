@@ -1,24 +1,23 @@
-{% extends "layout.html" %}
+{% extends "layout.html"%}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">  
+                <div class="message"> {{msg}} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+{% endblock %}
 
 {% block main %}
-    <div class="typer-container">
-
-        <div class="quote-display mt-4" id="quote-display">I like to look at one or two random quotes each morning. It can be a good exercise for journaling prompts</div>
-        <div id="separation">
-
-            <div class="row">
-                <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-                <button id="reset" type="button" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="44" height="20" viewBox="0 0 49 29" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-                    </svg>
-                </button>
-                <div id="timer">hi</div>
-            </div>  
-
-
-
+    <div class="welcome-msg">Welcome to TYPE30, How fast can you type 30 words?</div>
+    <div class="index-container">
+        <img class="gif" src="/static/home.gif">
     </div>
 {% endblock %}

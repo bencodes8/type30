@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Boards
+{% endblock %}
+
+{% block main %}
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Ranking #</th>
+        <th scope="col">User</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table">
+        {% for data in in_order %}
+        <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{ data[1] }}</td>
+        {% if data[3] is not none %}
+        <td>{{ data[3] }} s</td>
+        {% else %}
+        <td> No times yet! </td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>  
+</div>
+{% endblock %}

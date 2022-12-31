@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Play
+{% endblock %}
+
+{% block main %}
+
+    {% if not session["user_id"] %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">  
+            <div class="message"> You are not logged in! Your time will not be recorded! </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+        <div class="word-block mt-4" id="wordBlock">
+            <div id="loader" class="loader"></div>
+        </div>
+        
+        <div class="separation">
+        </div> 
+        
+            <div class="row">
+                <div class="inner-row">
+                    <input class="form-control" id="wordInput" type="text" placeholder="Input" aria-label="default input example" autofocus>
+                    <div class="tr">
+                        <button id="reset" type="button" class="btn btn-primary" onClick="window.location.reload()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                             </svg>
+                        </button>
+                        <div id="timer">0</div>
+                    </div>
+                </div>
+            </div>
+    
+
+{% endblock %}
